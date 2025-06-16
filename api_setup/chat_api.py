@@ -6,7 +6,7 @@ from google import genai
 
 def main_func(prompt):
     load_dotenv()
-    client = genai.Client(api_key=os.environ['API_KEY'])
+    client = genai.Client(api_key=os.environ['GEMINI_KEY'])
 
     response = client.models.generate_content(
         model="gemini-2.0-flash", contents=prompt

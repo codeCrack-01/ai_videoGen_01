@@ -10,13 +10,17 @@
         <p>{{ chat_reply }}</p>
 
         <form action="/home" method="post">
-            <input
-                type="text"
-                name="prompt"
-                placeholder="Enter your promt: "
-                required
-            />
-            <input type="submit" value="Search" />
+            {{ chatAI_form.csrf_token }}
+            <div>
+                {{ chatAI_form.prompt.label }} {{ chatAI_form.prompt }} {% if
+                chatAI_form.prompt.errors %}
+                <ul class="error">
+                    {% for error in chatAI_form.prompt.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %} {{ chatAI_form.submit_chatAI }}
+            </div>
         </form>
     </body>
 </html>
