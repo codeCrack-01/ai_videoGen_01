@@ -18,6 +18,9 @@ class ChatAI_Form(FlaskForm):
     prompt = StringField("ChatPrompt", validators=[DataRequired()])
     submit_chatAI = SubmitField('chatAI')
 
+class ImageAI_Form(FlaskForm):
+    prompt = StringField("ImagePrompt", validators=[DataRequired()])
+    submit_imageAI = SubmitField('imageAI')
 
 # Page Routes
 @app.route('/')
@@ -28,7 +31,7 @@ def main():
 def home():
     chatAI_form = ChatAI_Form()
 
-    script_prompt = "Say Hello World!"
+    script_prompt = "Hello World!"
     chat_reply = "No AI response yet. Type a prompt to get started!"
 
     if request.method == 'POST':
@@ -41,7 +44,7 @@ def home():
             flash('Chat Prompt validation failed. Please enter something.', 'danger')
             chat_reply = "Please fix the errors in your prompt."
     else:
-        chat_reply = main_func(script_prompt)
+        chat_reply = script_prompt
 
     return render_template("home.html", chatAI_form=chatAI_form, chat_reply=chat_reply)
 
