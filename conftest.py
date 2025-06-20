@@ -1,21 +1,22 @@
 import pytest
-from app import app
+from my_app.app import create_app
 
-@pytest.fixture
-def client():
-    """A test client for the app."""
-    with app.test_client() as client:
-        # Flask sessions require a SECRET_KEY to be set, which you've done in app.py.
-        # However, for testing session data, you often need to enable session transactions.
-        # This allows you to inspect and modify session data within tests.
-        with app.app_context():
-            # Any setup that needs the app context (like database connections if you had them)
-            # would go here. For now, it's good practice.
-            pass
-        yield client # This yields the client for use in tests
+@pytest.fixture()
+def app():
+    app = create_app()
+    app.config.update({
+        "TESTING": True,
+    })
 
-@pytest.fixture
-def app_context():
-    """Provides an application context for testing."""
-    with app.app_context():
-        yield
+    # other setup can go here
+
+    yield app
+    # clean up / reset resources here
+
+@pytest.fixture()
+def client(app):
+    return app.test_client()
+
+@pytest.fixture()
+def runner(app):
+    return app.test_cli_runner()
