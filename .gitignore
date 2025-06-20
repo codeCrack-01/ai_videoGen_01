@@ -2,3 +2,4 @@
 scratch.py
 .env
 pyrightconfig.json
+.zed

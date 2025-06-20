@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-from flask import Flask, redirect, render_template, request, url_for, flash
+from flask import Flask, redirect, render_template, request, url_for, flash, session
 from wtforms.validators import DataRequired
 from api_setup.chat_api import main_func
 from flask_wtf import FlaskForm
@@ -30,6 +30,8 @@ def main():
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     chatAI_form = ChatAI_Form()
+    promptList = ['1', '2']
+    session['prompt_list'] = promptList
 
     script_prompt = "Hello World!"
     chat_reply = "No AI response yet. Type a prompt to get started!"
@@ -38,7 +40,8 @@ def home():
         if chatAI_form.validate_on_submit():
             script_prompt = chatAI_form.prompt.data
             flash(f'Sent prompt: "{script_prompt}" to the AI.', 'success')
-            chat_reply = main_func(script_prompt)
+            (chat_reply, promptList) = main_func(script_prompt)
+            session['prompt_list'] = promptList
             #return redirect(url_for('home'))
         else:
             flash('Chat Prompt validation failed. Please enter something.', 'danger')
@@ -46,7 +49,7 @@ def home():
     else:
         chat_reply = script_prompt
 
-    return render_template("home.html", chatAI_form=chatAI_form, chat_reply=chat_reply)
+    return render_template("home.html", chatAI_form=chatAI_form, chat_reply=chat_reply, prompt_list=session.get('prompt_list'))
 
 
 if __name__ == '__main__':

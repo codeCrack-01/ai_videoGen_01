@@ -1,11 +1,11 @@
 {% extends "base.html" %} {% block title %} AI Chat {% endblock %}
 <!--This is the Chat Prompt Page-->
-{% block content %}
+{% from 'macros.html' import ai_inputForm %} {% block content %}
 <div>
     <h1>AI Chat Prompt Generator</h1>
     <p>{{ chat_reply }}</p>
 
-    <form action="/home" method="post">
+    <!-- <form action="/home" method="post">
         {{ chatAI_form.csrf_token }}
         <div>
             {{ chatAI_form.prompt.label }} {{ chatAI_form.prompt }} {% if
@@ -17,6 +17,18 @@
             </ul>
             {% endif %} {{ chatAI_form.submit_chatAI }}
         </div>
-    </form>
+    </form> -->
+
+    {{ ai_inputForm(chatAI_form, chatAI_form.submit_chatAI) }}
+
+    <div>
+        <ol>
+            {% for prompt in prompt_list %}
+            <ul>
+                {{ prompt }}
+            </ul>
+            {% endfor %}
+        </ol>
+    </div>
 </div>
 {% endblock %}

@@ -32,10 +32,10 @@ def main_func(prompt):
     matches = re.findall(regex_pattern, result)
 
     # Print each extracted prompt
-    for i, match in enumerate(matches):
-        print(f"--- Extracted Prompt {i+1} --- : " + matches[i].strip())
+    # for i, match in enumerate(matches):
+    #     print(f"--- Extracted Prompt {i+1} --- : " + matches[i].strip())
 
-    return result
+    return (result, matches)
 
 
 def remove_formatting(text):
