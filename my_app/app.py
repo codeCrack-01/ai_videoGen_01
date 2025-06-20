@@ -30,8 +30,8 @@ def main():
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     chatAI_form = ChatAI_Form()
-    promptList = ['1', '2']
-    session['prompt_list'] = promptList
+    if 'prompt_list' not in session:
+        session['prompt_list'] = ['No Data Yet']
 
     script_prompt = "Hello World!"
     chat_reply = "No AI response yet. Type a prompt to get started!"

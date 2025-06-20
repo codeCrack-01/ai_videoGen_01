@@ -1,10 +1,19 @@
-from gradio_client import Client #type: ignore
+import os
+from dotenv import load_dotenv
 
-def gen_image():
-    client = Client("black-forest-labs/FLUX.1-schnell")
+from gradio_client import Client
+
+load_dotenv()
+hf_token = os.environ['HF_TOKEN']
+
+def gen_image(prompt):
+    try:
+        client = Client("black-forest-labs/FLUX.1-schnell", hf_token=hf_token)
+    except Exception as e:
+        return e.__traceback__
 
     result = client.predict(
-    	prompt="Hello!!",
+    	prompt=prompt,
     	seed=0,
     	randomize_seed=True,
     	width=1920,
