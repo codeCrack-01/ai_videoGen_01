@@ -14,7 +14,7 @@ def main_func(prompt):
         f"Strictly adhere to the specified output format and include no conversational filler, greetings, "
         f"introductions, or conclusions whatsoever. Your output should be ready for direct copy-pasting.\n\n"
         f"**Script:**\n{prompt}\n\n"
-        f"**Generate between 4 to 12 highly detailed visual prompts, each describing all visual elements from the script.**\n"
+        f"**Generate, for each line, highly detailed visual prompts, at least 10, each describing all visual elements from the script.**\n"
         f"**Output Format:**\n"
         f"Prompt1: [Your highly detailed visual prompt for section 1 of the script]\n"
         f"Prompt2: [Your highly detailed visual prompt for section 2 of the script]\n"

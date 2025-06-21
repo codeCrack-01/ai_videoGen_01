@@ -15,6 +15,13 @@
             </ul>
             {% endfor %}
         </ol>
+
+        {% if showIRedirect %}
+        <form action="/generate" method="post">
+            <input type="submit" value="genImage" />
+        </form>
+        {% endif %}
+        <hr />
     </div>
 </div>
 {% endblock %}

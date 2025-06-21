@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block title %} AI Image Gen {% endblock %}
+<!--This is the Image Page-->
+{% block content %}
+<div>
+    {% if image_path %} {% for item in image_path %}
+    <div>
+        <h3>Prompt: {{ item.prompt }}</h3>
+        {% if item.image_url %}
+        <img src="{{ item.image_path }}" alt="Image for '{{ item.prompt }}'" />
+        {% else %}
+        <p style="color: red">Error generating image for this prompt.</p>
+        {% endif %}
+    </div>
+    {% endfor %} {% else %}
+    <p>No images were generated. Please go back and try again.</p>
+    {% endif %}
+</div>
+{% endblock %}
