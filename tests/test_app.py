@@ -1,6 +1,4 @@
-import pytest
 from bs4 import BeautifulSoup
-from unittest.mock import MagicMock, patch
 
 def test_main_redirect_to_home(client):
     """
